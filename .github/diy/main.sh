@@ -84,7 +84,7 @@ rm -rf $1
 # git clone --depth 1 https://github.com/Hyy2001X/AutoBuild-Packages && rm -rf AutoBuild-Packages/luci-app-adguardhome && mvdir AutoBuild-Packages
 # git clone --depth 1 https://github.com/sirpdboy/sirpdboy-package && mv -n sirpdboy-package/{luci-app-adguardhome} ./ ; rm -rf sirpdboy-package 
 git clone --depth 1 https://github.com/NueXini/NueXini_Packages.git && mv -n NueXini_Packages/{phtunnel,aliyundrive-webdav,luci-app-aliyundrive-webdav,ipv6-helper,luci-app-adguardhome,luci-app-netdata,luci-app-netspeedtest,luci-app-openclash,luci-app-tcpdump,luci-app-vlmcsd,vlmcsd,brook,homebox} ./ ; rm -rf NueXini_Packages
-# git clone --depth 1 https://github.com/gdck/luci-app-cupsd cupsd1 && mv -n cupsd1/luci-app-cupsd cupsd1/cups/cups ./ ; rm -rf cupsd1
+ git clone -b master --depth 1 https://github.com/oooopera/phtunnel.git && mv -n phtunnel/{luci-app-phtunnel} ./ ; rm -rf phtunnel
 # git clone --depth 1 https://github.com/kenzok8/wall && mv -n wall/* ./ ; rm -rf alist && rm -rf wall
 # git clone --depth 1 https://github.com/peter-tank/luci-app-fullconenat
 # git clone --depth 1 https://github.com/sirpdboy/sirpdboy-package && mv -n sirpdboy-package/luci-app-dockerman ./ ; rm -rf sirpdboy-package

@@ -244,6 +244,9 @@ function get_outbound(cfg) {
 		return null;
 
 	if (type(cfg) === 'array') {
+		if ('any-out' in cfg)
+			return 'any';
+
 		let outbounds = [];
 		for (let i in cfg)
 			push(outbounds, get_outbound(i));
@@ -265,7 +268,7 @@ function get_resolver(cfg) {
 	if (isEmpty(cfg))
 		return null;
 
-	if (cfg in ['default-dns', 'block-dns'])
+	if (cfg in ['default-dns', 'system-dns', 'block-dns'])
 		return cfg;
 	else
 		return 'cfg-' + cfg + '-dns';
@@ -289,6 +292,11 @@ config.dns = {
 		{
 			tag: 'default-dns',
 			address: wan_dns,
+			detour: 'direct-out'
+		},
+		{
+			tag: 'system-dns',
+			address: 'local',
 			detour: 'direct-out'
 		},
 		{
@@ -366,7 +374,6 @@ if (!isEmpty(main_node)) {
 			return;
 
 		push(config.dns.rules, {
-			invert: cfg.invert,
 			network: cfg.network,
 			protocol: cfg.protocol,
 			domain: cfg.domain,
@@ -374,12 +381,12 @@ if (!isEmpty(main_node)) {
 			domain_keyword: cfg.domain_keyword,
 			domain_regex: cfg.domain_regex,
 			geosite: cfg.geosite,
+			port: parse_port(cfg.port),
+			port_range: cfg.port_range,
 			source_geoip: cfg.source_geoip,
 			source_ip_cidr: cfg.source_ip_cidr,
 			source_port: parse_port(cfg.source_port),
 			source_port_range: cfg.source_port_range,
-			port: parse_port(cfg.port),
-			port_range: cfg.port_range,
 			process_name: cfg.process_name,
 			process_path: cfg.process_path,
 			user: cfg.user,

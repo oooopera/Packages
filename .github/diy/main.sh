@@ -84,7 +84,7 @@ rm -rf $1
 # git clone --depth 1 https://github.com/Hyy2001X/AutoBuild-Packages && rm -rf AutoBuild-Packages/luci-app-adguardhome && mvdir AutoBuild-Packages
 # git clone --depth 1 https://github.com/sirpdboy/sirpdboy-package && mv -n sirpdboy-package/{luci-app-adguardhome} ./ ; rm -rf sirpdboy-package 
 git clone https://github.com/sirpdboy/luci-app-netdata ./luci-app-netdata
-git clone --depth 1 https://github.com/oooopera/phtunnel.git && mv phtunnel  phtunnel1 && mv -u phtunnel1/* ./ ; rm -rf phtunnel1
+git clone --depth 1 https://github.com/oooopera/phtunnel1.git &&  mv -u phtunnel1/* ./ ; rm -rf phtunnel1
 #git clone --depth 1 https://github.com/haiibo/openwrt-packages.git && mv -u openwrt-packages/{brook,homebox} ./ ; rm -rf openwrt-packages
 #git clone --depth 1 https://github.com/NueXini/NueXini_Packages.git && mv -n NueXini_Packages/{phtunnel,aliyundrive-webdav,luci-app-aliyundrive-webdav,ipv6-helper,luci-app-adguardhome,luci-app-netdata,luci-app-netspeedtest,luci-app-openclash,luci-app-tcpdump,luci-app-vlmcsd,vlmcsd,brook,homebox} ./ ; rm -rf NueXini_Packages
 #git clone --depth 1 https://github.com/lxiaya/openwrt-homeproxy.git && mv -u openwrt-homeproxy/{luci-app-homeproxy,chinadns-ng} ./ ; rm -rf openwrt-homeproxy

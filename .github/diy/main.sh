@@ -83,7 +83,7 @@ rm -rf $1
 # git clone --depth 1 https://github.com/LGA1150/openwrt-sysuh3c && mvdir openwrt-sysuh3c
 # git clone --depth 1 https://github.com/Hyy2001X/AutoBuild-Packages && rm -rf AutoBuild-Packages/luci-app-adguardhome && mvdir AutoBuild-Packages
 # git clone --depth 1 https://github.com/sirpdboy/sirpdboy-package && mv -n sirpdboy-package/{luci-app-adguardhome} ./ ; rm -rf sirpdboy-package 
-git clone --depth 1 https://github.com/oooopera/phtunnel.git && mv -n phtunnel/{phtunnel,luci-app-phtunnel} ./ ; rm -rf phtunnel
+git clone --depth 1 https://github.com/oooopera/phtunnel.git && mv -n phtunnel/* ./ ; rm -rf phtunnel
 git clone --depth 1 https://github.com/NueXini/NueXini_Packages.git && mv -n NueXini_Packages/{phtunnel,aliyundrive-webdav,luci-app-aliyundrive-webdav,ipv6-helper,luci-app-adguardhome,luci-app-netdata,luci-app-netspeedtest,luci-app-openclash,luci-app-tcpdump,luci-app-vlmcsd,vlmcsd,brook,homebox} ./ ; rm -rf NueXini_Packages
 git clone --depth 1 https://github.com/lxiaya/openwrt-homeproxy.git && mv -n openwrt-homeproxy/{luci-app-homeproxy,chinadns-ng} ./ ; rm -rf openwrt-homeproxy
 # git clone --depth 1 https://github.com/kenzok8/wall && mv -n wall/* ./ ; rm -rf alist && rm -rf wall

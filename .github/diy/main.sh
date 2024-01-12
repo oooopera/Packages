@@ -84,7 +84,7 @@ rm -rf $1
 # git clone --depth 1 https://github.com/Hyy2001X/AutoBuild-Packages && rm -rf AutoBuild-Packages/luci-app-adguardhome && mvdir AutoBuild-Packages
 # git clone --depth 1 https://github.com/sirpdboy/sirpdboy-package && mv -n sirpdboy-package/{luci-app-adguardhome} ./ ; rm -rf sirpdboy-package 
 git clone https://github.com/sirpdboy/luci-app-netdata ./luci-app-netdata
-git clone --depth 1 https://github.com/oooopera/phtunnel.git 
+git clone --depth 1 https://github.com/oooopera/phtunnel.git && mv phtunnel  phtunnel1 && mv -u phtunnel1/* ./ ; rm -rf phtunnel1
 #git clone --depth 1 https://github.com/haiibo/openwrt-packages.git && mv -u openwrt-packages/{brook,homebox} ./ ; rm -rf openwrt-packages
 #git clone --depth 1 https://github.com/NueXini/NueXini_Packages.git && mv -n NueXini_Packages/{phtunnel,aliyundrive-webdav,luci-app-aliyundrive-webdav,ipv6-helper,luci-app-adguardhome,luci-app-netdata,luci-app-netspeedtest,luci-app-openclash,luci-app-tcpdump,luci-app-vlmcsd,vlmcsd,brook,homebox} ./ ; rm -rf NueXini_Packages
 #git clone --depth 1 https://github.com/lxiaya/openwrt-homeproxy.git && mv -u openwrt-homeproxy/{luci-app-homeproxy,chinadns-ng} ./ ; rm -rf openwrt-homeproxy
@@ -121,7 +121,7 @@ git clone https://github.com/kongfl888/luci-app-adguardhome.git ./luci-app-adgua
 # git clone --depth 1 https://github.com/ximiTech/luci-app-msd_lite
 # git clone --depth 1 -b master https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic
 # git clone --depth 1 https://github.com/sbwml/luci-app-alist openwrt-alist && mv -n openwrt-alist/*alist ./ ; rm -rf openwrt-alist
-git clone --depth 1 https://github.com/vernesong/OpenClash && mv -n OpenClash/luci-app-openclash ./; rm -rf OpenClash
+#git clone --depth 1 https://github.com/vernesong/OpenClash && mv -n OpenClash/luci-app-openclash ./; rm -rf OpenClash
 #git clone --depth 1 https://github.com/messense/aliyundrive-webdav aliyundrive && mv -n aliyundrive/openwrt/* ./ ; rm -rf aliyundrive
 # # # # git clone --depth 1 https://github.com/messense/aliyundrive-fuse aliyundrive && mv -n aliyundrive/openwrt/* ./;rm -rf aliyundrive
 # # # # git clone --depth 1 https://github.com/kenzok8/litte && mv -n litte/luci-theme-atmaterial_new litte/luci-theme-mcat litte/luci-theme-tomato ./ ; rm -rf litte

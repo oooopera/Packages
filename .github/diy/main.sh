@@ -83,9 +83,18 @@ rm -rf $1
 # git clone --depth 1 https://github.com/LGA1150/openwrt-sysuh3c && mvdir openwrt-sysuh3c
 # git clone --depth 1 https://github.com/Hyy2001X/AutoBuild-Packages && rm -rf AutoBuild-Packages/luci-app-adguardhome && mvdir AutoBuild-Packages
 # git clone --depth 1 https://github.com/sirpdboy/sirpdboy-package && mv -n sirpdboy-package/{luci-app-adguardhome} ./ ; rm -rf sirpdboy-package 
-git clone --depth 1 https://github.com/oooopera/phtunnel.git && mv -n phtunnel/* ./ ; rm -rf phtunnel
-git clone --depth 1 https://github.com/NueXini/NueXini_Packages.git && mv -n NueXini_Packages/{phtunnel,aliyundrive-webdav,luci-app-aliyundrive-webdav,ipv6-helper,luci-app-adguardhome,luci-app-netdata,luci-app-netspeedtest,luci-app-openclash,luci-app-tcpdump,luci-app-vlmcsd,vlmcsd,brook,homebox} ./ ; rm -rf NueXini_Packages
-git clone --depth 1 https://github.com/lxiaya/openwrt-homeproxy.git && mv -n openwrt-homeproxy/{luci-app-homeproxy,chinadns-ng} ./ ; rm -rf openwrt-homeproxy
+git clone https://github.com/sirpdboy/luci-app-netdata ./luci-app-netdata
+git clone --depth 1 https://github.com/oooopera/phtunnel.git 
+#git clone --depth 1 https://github.com/haiibo/openwrt-packages.git && mv -u openwrt-packages/{brook,homebox} ./ ; rm -rf openwrt-packages
+#git clone --depth 1 https://github.com/NueXini/NueXini_Packages.git && mv -n NueXini_Packages/{phtunnel,aliyundrive-webdav,luci-app-aliyundrive-webdav,ipv6-helper,luci-app-adguardhome,luci-app-netdata,luci-app-netspeedtest,luci-app-openclash,luci-app-tcpdump,luci-app-vlmcsd,vlmcsd,brook,homebox} ./ ; rm -rf NueXini_Packages
+#git clone --depth 1 https://github.com/lxiaya/openwrt-homeproxy.git && mv -u openwrt-homeproxy/{luci-app-homeproxy,chinadns-ng} ./ ; rm -rf openwrt-homeproxy
+git clone --depth 1 https://github.com/immortalwrt/immortalwrt.git && mv -u immortalwrt/package/emortal/ipv6-helper ./ ; rm -rf immortalwrt
+git clone https://github.com/KFERMercer/luci-app-tcpdump.git ./luci-app-tcpdump
+git clone --depth 1 https://github.com/vernesong/OpenClash && mv -u OpenClash/luci-app-openclash ./ ; rm -rf OpenClash
+git clone https://github.com/muink/luci-app-netspeedtest.git ./luci-app-netspeedtest
+git clone https://github.com/ssuperh/luci-app-vlmcsd-new.git && mv -u  luci-app-vlmcsd-new/luci-app-vlmcsd ./ ; rm -rf luci-app-vlmcsd-new
+git clone https://github.com/mchome/openwrt-vlmcsd.git ./openwrt-vlmcsd
+git clone https://github.com/kongfl888/luci-app-adguardhome.git ./luci-app-adguardhome
 # git clone --depth 1 https://github.com/kenzok8/wall && mv -n wall/* ./ ; rm -rf alist && rm -rf wall
 # git clone --depth 1 https://github.com/peter-tank/luci-app-fullconenat
 # git clone --depth 1 https://github.com/sirpdboy/sirpdboy-package && mv -n sirpdboy-package/luci-app-dockerman ./ ; rm -rf sirpdboy-package
@@ -112,8 +121,8 @@ git clone --depth 1 https://github.com/lxiaya/openwrt-homeproxy.git && mv -n ope
 # git clone --depth 1 https://github.com/ximiTech/luci-app-msd_lite
 # git clone --depth 1 -b master https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic
 # git clone --depth 1 https://github.com/sbwml/luci-app-alist openwrt-alist && mv -n openwrt-alist/*alist ./ ; rm -rf openwrt-alist
-# git clone --depth 1 https://github.com/vernesong/OpenClash && mv -n OpenClash/luci-app-openclash ./; rm -rf OpenClash
-# # # # git clone --depth 1 https://github.com/messense/aliyundrive-webdav aliyundrive && mv -n aliyundrive/openwrt/* ./ ; rm -rf aliyundrive
+git clone --depth 1 https://github.com/vernesong/OpenClash && mv -n OpenClash/luci-app-openclash ./; rm -rf OpenClash
+#git clone --depth 1 https://github.com/messense/aliyundrive-webdav aliyundrive && mv -n aliyundrive/openwrt/* ./ ; rm -rf aliyundrive
 # # # # git clone --depth 1 https://github.com/messense/aliyundrive-fuse aliyundrive && mv -n aliyundrive/openwrt/* ./;rm -rf aliyundrive
 # # # # git clone --depth 1 https://github.com/kenzok8/litte && mv -n litte/luci-theme-atmaterial_new litte/luci-theme-mcat litte/luci-theme-tomato ./ ; rm -rf litte
 # # # # git clone --depth 1 https://github.com/fw876/helloworld && mv -n helloworld/luci-app-ssr-plus helloworld/naiveproxy ./ ; rm -rf helloworld

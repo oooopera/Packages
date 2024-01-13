@@ -92,8 +92,8 @@ git clone --depth 1 https://github.com/immortalwrt/immortalwrt.git && mv -u immo
 git clone https://github.com/KFERMercer/luci-app-tcpdump.git ./luci-app-tcpdump
 git clone --depth 1 https://github.com/vernesong/OpenClash && mv -u OpenClash/luci-app-openclash ./ ; rm -rf OpenClash
 git clone https://github.com/muink/luci-app-netspeedtest.git ./luci-app-netspeedtest
-git clone https://github.com/ssuperh/luci-app-vlmcsd-new.git && mv -u  luci-app-vlmcsd-new/luci-app-vlmcsd ./ ; rm -rf luci-app-vlmcsd-new
-git clone https://github.com/flytosky-f/openwrt-vlmcsd ./openwrt-vlmcsd
+git clone https://github.com/cokebar/luci-app-vlmcsd.git ./luci-app-vlmcsd 
+git clone https://github.com/dwfreed/openwrt-vlmcsd.git ./openwrt-vlmcsd
 git clone https://github.com/kongfl888/luci-app-adguardhome.git ./luci-app-adguardhome
 # git clone --depth 1 https://github.com/kenzok8/wall && mv -n wall/* ./ ; rm -rf alist && rm -rf wall
 # git clone --depth 1 https://github.com/peter-tank/luci-app-fullconenat

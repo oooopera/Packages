@@ -1,27 +1,18 @@
-#
-# Copyright (C) 2019 Tony Feng <fengtons@gmail.com>
-#
-# This is free software, licensed under the GNU General Public License v3.
-# See /LICENSE for more information.
-#
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=vlmcsd
-PKG_VERSION:=svn1112
+PKG_VERSION:=svn1113
 PKG_RELEASE:=2
 
-PKG_MAINTAINER:=Tony Feng <fengtons@gmail.com>
+PKG_MAINTAINER:=HotBird64
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
-PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/Wind4/vlmcsd.git
-PKG_SOURCE_VERSION:=ce1dfa16b26a64dfe58d8e8154ce862cafe396d7
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_SOURCE_SUBDIR)
+PKG_SOURCE:=$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/cokebar/vlmcsd/archive
+PKG_HASH:=b932cbb9453a797ab4bc1fc0cb651434412e8ed8fe2df8ec04996c65264654fa
 
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
@@ -38,29 +29,16 @@ define Package/vlmcsd/description
 	vlmcsd is a KMS Emulator in C.
 endef
 
-define Package/vlmcsd/postrm
-#!/bin/sh
-. /lib/functions.sh
-
-remove_srvhost() {
-    local section=$1
-    [ "${section%%_*}" = "vlmcsd" ] && uci_remove dhcp "$section"
-}
-
-config_load dhcp
-config_foreach remove_srvhost srvhost
-uci_commit dhcp
-/etc/init.d/dnsmasq reload
-exit 0
-endef
+MAKE_FLAGS += \
+	-C $(PKG_BUILD_DIR)
 
 define Package/vlmcsd/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcs $(1)/usr/bin/vlmcs
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcsd $(1)/usr/bin/vlmcsd
-
-	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) ./files/vlmcsd.conf $(1)/etc/config/vlmcsd
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/vlmcs $(1)/usr/bin/vlmcs
+	$(INSTALL_DIR) $(1)/etc
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/etc/vlmcsd.ini $(1)/etc/vlmcsd.ini
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/etc/vlmcsd.kmd $(1)/etc/vlmcsd.kmd
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/vlmcsd.init $(1)/etc/init.d/vlmcsd
 endef

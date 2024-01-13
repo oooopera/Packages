@@ -1,11 +1,8 @@
 # openwrt-vlmcsd
-a package for vlmcsd
-
+- 编译：  
+进入 openwrt sdk 目录，执行：
 ```
-PS:
-1. srv-host=_vlmcs._tcp.lan,openwrt.lan,1688,0,100 添加到 /etc/dnsmasq.conf .
-2. /etc/init.d/vlmcsd enable && /etc/init.d/vlmcsd start && /etc/init.d/dnsmasq restart
-3. OK, 你的路由器下应该可以自动激活Windows或者Office了 :)
+git clone https://github.com/flytosky-f/openwrt-vlmcsd.git package/openwrt-vlmcsd
+make menuconfig
+make package/openwrt-vlmcsd/compile V=99
 ```
-
-配套luci: [luci-app-vlmcsd](https://github.com/mchome/luci-app-vlmcsd "")

@@ -85,6 +85,7 @@ rm -rf $1
 # git clone --depth 1 https://github.com/sirpdboy/sirpdboy-package && mv -n sirpdboy-package/{luci-app-adguardhome} ./ ; rm -rf sirpdboy-package 
 git clone https://github.com/sirpdboy/luci-app-netdata ./luci-app-netdata
 git clone https://github.com/linkease/istore ./istore
+https://github.com/Siriling/5G-Modem-Support.git
 #git clone https://github.com/JoveYu/openwrt-shadowsocks-libev.git && mv -n openwrt-shadowsocks-libev/{luci-app-shadowsocks-libev,shadowsocks-libev} ./ ; rm -rf openwrt-shadowsocks-libev
 git clone https://github.com/oooopera/openwrt-shadowsocks-libev.git
 git clone --depth 1 https://github.com/oooopera/phtunnel1.git &&  mv -u phtunnel1/* ./ ; rm -rf phtunnel1

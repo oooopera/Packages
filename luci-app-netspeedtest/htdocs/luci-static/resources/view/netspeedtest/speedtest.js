@@ -9,6 +9,7 @@
 'require form';
 
 const TestTimeout = 240 * 1000; // 4 Minutes
+const ResultFile = '/var/speedtest_result';
 
 var callDownloadOokla = rpc.declare({
 	object: 'luci.netspeedtest',
@@ -37,8 +38,8 @@ return view.extend({
 	load() {
 	return Promise.all([
 		callOoklaVerify(),
-		L.resolveDefault(fs.read('/var/speedtest_result'), null),
-		L.resolveDefault(fs.stat('/var/speedtest_result'), {}),
+		L.resolveDefault(fs.read(ResultFile), null),
+		L.resolveDefault(fs.stat(ResultFile), {}),
 		uci.load('netspeedtest')
 	]);
 	},
@@ -47,7 +48,6 @@ return view.extend({
 		const has_ookla = data[0].result;
 		const result_content = data[1] ? data[1].trim().split("\n") : [];
 		const result_mtime = data[2] ? data[2].mtime * 1000 : 0;
-		const date = new Date();
 
 		let m, s, o;
 
@@ -60,16 +60,19 @@ return view.extend({
 			const Testing = E('span', { 'class': 'spinning', 'style': 'color:yellow;font-weight:bold' }, [
 				_('Testing in progress...')
 			]);
-			const TestS = E('div', { 'style': 'max-width:500px' }, [
-				E('a', { 'href': result_content[0], 'target': '_blank' }, [
-					E('img', { 'src': result_content[0] + '.png', 'style': 'max-width:100%;max-height:100%;vertical-align:middle' }, [])
+			const TestS = function(content) {
+				return E('div', { 'style': 'max-width:500px' }, [
+					E('a', { 'href': content, 'target': '_blank' }, [
+						E('img', { 'src': content + '.png', 'style': 'max-width:100%;max-height:100%;	vertical-align:middle' }, [])
+					])
 				])
-			]);
+			}
+			const NoSer = E('span', { 'style': 'color:red;font-weight:bold' }, [ _('No available servers.') ]);
 			const TestF = E('span', { 'style': 'color:red;font-weight:bold' }, [ _('Test failed.') ]);
 			const TestN = E('span', { 'style': 'color:red;font-weight:bold;display:none' }, [ _('No result.') ]);
 
 			poll.add(function() {
-				return L.resolveDefault(fs.read('/var/speedtest_result'), null).then((res) => {
+				return L.resolveDefault(fs.read(ResultFile), null).then((res) => {
 					const result_content = res ? res.trim().split("\n") : [];
 					const result_stat = document.querySelector('#speedtest_result');
 
@@ -77,7 +80,9 @@ return view.extend({
 						if (result_content[0] == 'Testing')
 							dom.content(result_stat, [ Testing ]);
 						else if (result_content[0].match(/https?:\S+/))
-							dom.content(result_stat, [ TestS ]);
+							dom.content(result_stat, [ TestS(result_content[0]) ]);
+						else if (result_content[0] == 'No available servers')
+							dom.content(result_stat, [ NoSer ]);
 						else if (result_content[0] == 'Test failed')
 							dom.content(result_stat, [ TestF ]);
 					} else
@@ -89,7 +94,9 @@ return view.extend({
 				if (result_content[0] == 'Testing')
 					El.appendChild(Testing);
 				else if (result_content[0].match(/https?:\S+/))
-					El.appendChild(TestS);
+					El.appendChild(TestS(result_content[0]));
+				else if (result_content[0] == 'No available servers')
+					El.appendChild(NoSer);
 				else if (result_content[0] == 'Test failed')
 					El.appendChild(TestF);
 			} else
@@ -104,7 +111,7 @@ return view.extend({
 		o = s.option(form.Button, '_start', _('Start Test'));
 		o.inputtitle = _('Start Test');
 		o.inputstyle = 'apply';
-		if (result_content.length && result_content[0] == 'Testing' && (date.getTime() - result_mtime) < TestTimeout)
+		if (result_content.length && result_content[0] == 'Testing' && (Date.now() - result_mtime) < TestTimeout)
 			o.readonly = true;
 		o.onclick = function(ev, section_id) {
 			//L.env.rpctimeout = 180; // 3 minutes
@@ -112,21 +119,19 @@ return view.extend({
 				window.location = window.location.href.split('#')[0];
 			}, L.env.apply_display * 500);
 
-			return fs.exec_direct('ubus', [ 'call', 'luci.netspeedtest', 'speedtest' ]).then((res) => {});
-			/* return callSpeedtest().then((res) => {
+			return callSpeedtest().then((res) => {
 				if (!res.result)
 					ui.addNotification(null, E('p', _('Test failed: %s').format(res.error)), 'error');
-			}); */
+			});
 		};
 
 		o = s.option(form.DummyValue, '_ookla_status', _('Ookla® SpeedTest-CLI Status'));
 		o.rawhtml = true;
-		o.cfgvalue = function(s) {
-			if (has_ookla) {
-				return E('span', { 'id': 'ookla_status', 'style': 'color:green;font-weight:bold' }, [ _('Installed') ]);
-			} else {
-				return E('span', { 'id': 'ookla_status', 'style': 'color:red;font-weight:bold' }, [ _('Not Installed') ]);
-			}
+		o.cfgvalue = function() {
+			return E('span', {
+				id: 'ookla_status',
+				style: `color:${has_ookla ? 'green' : 'red'};font-weight:bold`
+			}, [ has_ookla ? _('Installed') : _('Not Installed') ]);
 		};
 		poll.add(function() {
 			return callOoklaVerify().then((res) => {
@@ -134,13 +139,8 @@ return view.extend({
 				const ookla_stat = document.querySelector('#ookla_status');
 
 				if (ookla_stat) {
-					if (has_ookla) {
-						ookla_stat.style.color = 'green';
-						dom.content(ookla_stat, [ _('Installed') ]);
-					} else {
-						ookla_stat.style.color = 'red';
-						dom.content(ookla_stat, [ _('Not Installed') ]);
-					}
+					ookla_stat.style.color = has_ookla ? 'green' : 'red';
+					dom.content(ookla_stat, [ has_ookla ? _('Installed') : _('Not Installed') ]);
 				}
 			});
 		})

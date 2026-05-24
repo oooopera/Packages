@@ -10,7 +10,9 @@ const testurls = [
 	//['https://speed.cloudflare.com', _('Cloudflare SpeedTest')], //X-Frame-Options: DENY
 	['https://static.hdslb.com', _('Bilibili hdslb')],
 	['https://fast.com', _('Netflix Fast')],
-	['https://test.ustc.edu.cn', _('USTC EDU SpeedTest')]
+	['https://test.ustc.edu.cn', _('USTC EDU SpeedTest')],
+	['https://test.nju.edu.cn', _('Nanjing University Speed Test')],
+	['http://speed5.ntu.edu.tw/speed5', _('NTU Speed Test')]
 ];
 
 return view.extend({

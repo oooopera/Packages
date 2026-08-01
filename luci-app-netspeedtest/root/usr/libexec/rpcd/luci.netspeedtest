@@ -10,7 +10,7 @@ NAMEDDSECTION='config'
 
 # netspeedtest
 OOKLA_SPEEDTEST='/usr/libexec/netspeedtest/speedtest'
-SPEEDTEST_RESULT='/var/speedtest_result'
+SPEEDTEST_RESULT='/tmp/speedtest_result'
 
 # api
 speedTestServersUrl="https://www.speedtest.net/api/js/servers"

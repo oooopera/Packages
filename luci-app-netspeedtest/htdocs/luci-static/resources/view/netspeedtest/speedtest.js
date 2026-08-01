@@ -9,7 +9,7 @@
 'require form';
 
 const TestTimeout = 240 * 1000; // 4 Minutes
-const ResultFile = '/var/speedtest_result';
+const ResultFile = '/tmp/speedtest_result';
 
 var callDownloadOokla = rpc.declare({
 	object: 'luci.netspeedtest',
